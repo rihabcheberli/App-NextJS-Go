@@ -32,7 +32,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center p-8">
-      <div className="p-8 bg-white shadow-md rounded-md w-3/4">
+      <div className="p-8 bg-white shadow-2xl rounded-md w-3/4">
         <div className="text-2xl text-neutral text-center mb-4">Register</div>
         {error && <div className="text-error mb-4">{error}</div>}
         <input

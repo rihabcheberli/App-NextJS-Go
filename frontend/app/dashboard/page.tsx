@@ -1,9 +1,11 @@
 import React from 'react';
 import UsersTable from '../components/UserTable';
+import Navbar from '../components/Navbar';
 
 const DashboardPage = () => {
-    return (
-        <UsersTable/>
+    return (<div>
+        <Navbar />
+        <UsersTable /></div>
     );
 };
 
