@@ -2,11 +2,14 @@
 
 import React, { useState } from 'react';
 import { REGISTER_API_URL } from '../api';
+import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter()
 
   const handleRegister = async () => {
     try {
@@ -18,6 +21,10 @@ const Register = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      if (response.ok) {
+        router.push('/dashboard');
+      }
+      else { setError(data.message); }
     } catch (error) {
       setError('Failed to register. Please try again.');
     }
@@ -49,6 +56,12 @@ const Register = () => {
           >
             Register
           </button>
+        </div>
+        <div className="text-sm text-center">
+          Already have an account?{' '}
+          <Link href="/">
+            <div className="text-info">Login</div>
+          </Link>
         </div>
       </div>
     </div>

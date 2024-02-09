@@ -2,11 +2,14 @@
 
 import React, { useState } from 'react';
 import { LOGIN_API_URL } from '../api';
+import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter()
 
   const handleLogin = async () => {
     try {
@@ -18,6 +21,11 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      if (response.ok) {
+        router.push('/dashboard');
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
       setError('Failed to login. Please try again.');
     }
@@ -49,6 +57,12 @@ const Login = () => {
           >
             Login
           </button>
+        </div>
+        <div className="text-sm text-center">
+          Don't have an account?{' '}
+          <Link href="/register">
+            <div className="text-info">Register</div>
+          </Link>
         </div>
       </div>
     </div>

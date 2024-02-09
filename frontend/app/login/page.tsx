@@ -1,16 +1,11 @@
 import React from 'react';
 import Login from '../components/Login';
-import Link from 'next/link';
 
 const LoginPage = () => {
-    return (<div>
-        <Login />
-        <div className="text-sm text-center">
-            Don't have an account?{' '}
-            <Link href="/register">
-                <div className="text-info">Register</div>
-            </Link>
-        </div></div>
+    return (
+        <div className="flex min-h-screen flex-col items-center justify-between p-24">
+            <Login />
+        </div>
 
     );
 };
