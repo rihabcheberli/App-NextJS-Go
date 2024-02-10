@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
+
 const Navbar = () => {
     const router = useRouter();
 
@@ -18,8 +19,7 @@ const Navbar = () => {
 
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-24 rounded-full ring ring-neutral ring-offset-base-100 ring-offset-2">
-                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        <div className="w-24 rounded-full bg-neutral ring ring-neutral ring-offset-base-100 ring-offset-2">
                         </div>
                     </div>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">

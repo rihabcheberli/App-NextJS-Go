@@ -56,13 +56,13 @@ func GetUserByID(userID string) (*models.User, error) {
 }
 
 func CreateUser(user *models.User) error {
-	query := "INSERT INTO users (email, password) VALUES ($1, $2)"
-	return executeQuery(query, user.Email, user.Password)
+	query := "INSERT INTO users (email, password, name, last_name) VALUES ($1, $2, $3, $4)"
+	return executeQuery(query, user.Email, user.Password, user.Name, user.LastName)
 }
 
 func UpdateUserByID(userID string, updatedUser models.User) error {
-	query := "UPDATE users SET email = $1 WHERE id = $2"
-	return executeQuery(query, updatedUser.Email, userID)
+	query := "UPDATE users SET email = $1, name = $2, last_name = $3 WHERE id = $4"
+	return executeQuery(query, updatedUser.Email, updatedUser.Name, updatedUser.LastName, userID)
 }
 
 func DeleteUserByID(userID string) error {
@@ -98,7 +98,7 @@ func GetAllUsers() ([]*models.User, error) {
 	defer db.Close()
 
 	var users []*models.User
-	query := "SELECT id, email FROM users"
+	query := "SELECT id, email, name, last_name FROM users"
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, fmt.Errorf("error fetching users: %v", err)
@@ -107,7 +107,7 @@ func GetAllUsers() ([]*models.User, error) {
 
 	for rows.Next() {
 		var user models.User
-		err := rows.Scan(&user.ID, &user.Email)
+		err := rows.Scan(&user.ID, &user.Email, &user.Name, &user.LastName)
 		if err != nil {
 			return nil, fmt.Errorf("error scanning user row: %v", err)
 		}

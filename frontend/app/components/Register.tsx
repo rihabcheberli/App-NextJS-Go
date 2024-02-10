@@ -8,6 +8,8 @@ import Link from 'next/link';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [lastname, setLastName] = useState('');
   const [error, setError] = useState('');
   const router = useRouter()
 
@@ -18,7 +20,7 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, name, lastname }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -35,6 +37,20 @@ const Register = () => {
       <div className="p-8 bg-white shadow-2xl rounded-md w-3/4">
         <div className="text-2xl text-neutral text-center mb-4">Register</div>
         {error && <div className="text-error mb-4">{error}</div>}
+        <input
+          className="input input-bordered w-full mb-8 mt-2"
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+          <input
+          className="input input-bordered w-full mb-8 mt-2"
+          type="text"
+          placeholder="Last Name"
+          value={lastname}
+          onChange={(e) => setLastName(e.target.value)}
+        />
         <input
           className="input input-bordered w-full mb-8 mt-2"
           type="email"
