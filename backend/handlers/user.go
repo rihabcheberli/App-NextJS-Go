@@ -41,6 +41,13 @@ func CreateUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	hashedPassword, err := utils.HashPassword(user.Password)
+	if err != nil {
+		utils.RespondWithError(w, http.StatusInternalServerError, "Failed to hash password")
+		return
+	}
+	user.Password = hashedPassword
+
 	err = database.CreateUser(&user)
 	if err != nil {
 		utils.RespondWithError(w, http.StatusInternalServerError, "Failed to create user account: "+err.Error())
